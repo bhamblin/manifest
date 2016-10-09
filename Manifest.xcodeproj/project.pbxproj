@@ -13,6 +13,7 @@
 		8B76AF0C1DAAE49D006EAF84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B76AF0A1DAAE49D006EAF84 /* Main.storyboard */; };
 		8B76AF0E1DAAE49D006EAF84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B76AF0D1DAAE49D006EAF84 /* Assets.xcassets */; };
 		8B76AF111DAAE49D006EAF84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B76AF0F1DAAE49D006EAF84 /* LaunchScreen.storyboard */; };
+		8B76AF191DAAEE92006EAF84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B76AF181DAAEE92006EAF84 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		8B76AF0D1DAAE49D006EAF84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B76AF101DAAE49D006EAF84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B76AF121DAAE49D006EAF84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B76AF181DAAEE92006EAF84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				8B76AF0A1DAAE49D006EAF84 /* Main.storyboard */,
 				8B76AF0D1DAAE49D006EAF84 /* Assets.xcassets */,
 				8B76AF0F1DAAE49D006EAF84 /* LaunchScreen.storyboard */,
+				8B76AF181DAAEE92006EAF84 /* GoogleService-Info.plist */,
 				8B76AF121DAAE49D006EAF84 /* Info.plist */,
 			);
 			path = Manifest;
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B76AF111DAAE49D006EAF84 /* LaunchScreen.storyboard in Resources */,
+				8B76AF191DAAEE92006EAF84 /* GoogleService-Info.plist in Resources */,
 				8B76AF0E1DAAE49D006EAF84 /* Assets.xcassets in Resources */,
 				8B76AF0C1DAAE49D006EAF84 /* Main.storyboard in Resources */,
 			);
