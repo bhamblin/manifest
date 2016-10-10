@@ -28,11 +28,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="A61-DE-TXH"/>
+                    <navigationItem key="navigationItem" id="A61-DE-TXH">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="x0H-mZ-aeW">
+                            <connections>
+                                <action selector="handleLogout:" destination="QSx-v6-Nti" id="tFJ-bz-zhM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lWD-sx-K6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="896.79999999999995" y="-485.30734632683664"/>
+            <point key="canvasLocation" x="1028" y="-534"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -74,12 +80,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Already have an account? Sign In"/>
                                 <connections>
-                                    <segue destination="QKY-Yq-clv" kind="show" id="bFr-o9-xUO"/>
+                                    <segue destination="QKY-Yq-clv" kind="show" id="igU-Mp-gYH"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="7Pu-bj-os9"/>
                     <connections>
                         <outlet property="emailTextField" destination="aLz-ye-bCh" id="z8p-e9-kbN"/>
                         <outlet property="passwordTextField" destination="Ayp-Bh-R4J" id="rST-yb-uRa"/>
@@ -88,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-42" y="177"/>
+            <point key="canvasLocation" x="1378" y="331"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="0Kp-Wf-tFe">
@@ -121,6 +128,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign In"/>
                                 <connections>
+                                    <action selector="handleSignIn:" destination="QKY-Yq-clv" eventType="touchUpInside" id="WA3-k3-DbN"/>
                                     <action selector="handleSignUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nn6-Jc-018"/>
                                 </connections>
                             </button>
@@ -130,17 +138,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Need an account? Sign Up!"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="gyF-ha-iyb"/>
+                                    <action selector="handlePop:" destination="QKY-Yq-clv" eventType="touchUpInside" id="qPj-5S-ACE"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="d3z-in-ySg"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="xYV-YZ-6Dk" id="6Ga-AR-MkI"/>
+                        <outlet property="passwordTextField" destination="WmP-dR-lPf" id="eeL-xF-c7d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TBe-LC-ES4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780" y="162"/>
+            <point key="canvasLocation" x="2255" y="331"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SIL-bb-YJH">
@@ -158,7 +170,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cy6-Bo-lXQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-42.399999999999999" y="-485.30734632683664"/>
+            <point key="canvasLocation" x="-86" y="-535"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WzX-rR-JJY">
+            <objects>
+                <navigationController storyboardIdentifier="SignUpNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="dso-uw-XMi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zaL-f7-4F5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="NOa-ux-n4j"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6wb-ea-28H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="538" y="331"/>
         </scene>
     </scenes>
 </document>
