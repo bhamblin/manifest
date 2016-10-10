@@ -11,6 +11,8 @@ import Firebase
 
 class SignUpViewController: UIViewController {
 
+    @IBOutlet weak var fullNameTextField: UITextField!
+    @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
@@ -20,6 +22,12 @@ class SignUpViewController: UIViewController {
             if error != nil {
                 print("ERROR: ", error)
             } else {
+                var ref: FIRDatabaseReference!
+                
+                ref = FIRDatabase.database().reference()
+                ref.child("users/\(user!.uid)/username").setValue(self.userNameTextField.text!)
+                ref.child("users/\(user!.uid)/fullname").setValue(self.fullNameTextField.text!)
+                
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -27,8 +35,6 @@ class SignUpViewController: UIViewController {
                 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.isNavigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {
