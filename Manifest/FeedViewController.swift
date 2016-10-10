@@ -25,9 +25,8 @@ class FeedViewController: UIViewController {
         if let user = FIRAuth.auth()?.currentUser {
             print(user, "signed in")
         } else {
-            print("not signed in")
-            let signUpViewController = self.storyboard!.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
-            self.present(signUpViewController, animated: true, completion: nil)
+            let signUpNavigationController = self.storyboard!.instantiateViewController(withIdentifier: "SignUpNavigationController") as! UINavigationController
+            self.navigationController?.present(signUpNavigationController, animated: true)
         }
     }
 

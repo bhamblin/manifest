@@ -20,15 +20,15 @@ class SignUpViewController: UIViewController {
             if error != nil {
                 print("ERROR: ", error)
             } else {
-                print("USER: ", user)
-                let feedViewController = self.storyboard!.instantiateViewController(withIdentifier: "FeedViewController") as! FeedViewController
-                self.present(feedViewController, animated: true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
-    
+                
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {
