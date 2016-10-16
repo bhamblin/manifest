@@ -16,6 +16,10 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBAction func returnKey(_ sender: AnyObject) {
+        sender.resignFirstResponder()
+    }
+    
     @IBAction func handleSignUp(_ sender: AnyObject) {
         FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
             if error != nil {
