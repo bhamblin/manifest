@@ -38,7 +38,12 @@ class SignUpViewController: UIViewController {
                 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
+        
+        self.fullNameTextField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0);
+        self.userNameTextField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0);
+        self.emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0);
+        self.passwordTextField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0);
+}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
