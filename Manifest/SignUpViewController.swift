@@ -38,10 +38,27 @@ class SignUpViewController: UIViewController {
                 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
+
+        let paddingViewFull = UIView(frame: CGRect(x: 10, y: 0, width: 10, height: 44))
+        fullNameTextField.leftView = paddingViewFull
+        fullNameTextField.leftViewMode = UITextFieldViewMode.always
+        
+        let paddingViewUser = UIView(frame: CGRect(x: 10, y: 0, width: 10, height: 44))
+        userNameTextField.leftView = paddingViewUser
+        userNameTextField.leftViewMode = UITextFieldViewMode.always
+        
+        let paddingViewEmail = UIView(frame: CGRect(x: 10, y: 0, width: 10, height: 44))
+        emailTextField.leftView = paddingViewEmail
+        emailTextField.leftViewMode = UITextFieldViewMode.always
+        
+        let paddingViewPassword = UIView(frame: CGRect(x: 10, y: 0, width: 10, height: 44))
+        passwordTextField.leftView = paddingViewPassword
+        passwordTextField.leftViewMode = UITextFieldViewMode.always
+}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 }
+
 

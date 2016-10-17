@@ -39,6 +39,15 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let paddingViewEmail = UIView(frame: CGRect(x: 10, y: 0, width: 10, height: 44))
+        emailTextField.leftView = paddingViewEmail
+        emailTextField.leftViewMode = UITextFieldViewMode.always
+        
+        let paddingViewPassword = UIView(frame: CGRect(x: 10, y: 0, width: 10, height: 44))
+        passwordTextField.leftView = paddingViewPassword
+        passwordTextField.leftViewMode = UITextFieldViewMode.always
+        
     }
 
     override func didReceiveMemoryWarning() {
