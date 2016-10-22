@@ -1,78 +1,74 @@
 import UIKit
 import Firebase
 
-class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,  UITableViewDataSource, UITableViewDelegate {
 
-    let imagePicker = UIImagePickerController()
-    var projectId: String?
-    
+    @IBOutlet weak var postsTableView: UITableView!
     @IBOutlet weak var projectTitletextField: UITextField?
     
+    let imagePicker = UIImagePickerController()
+    
+    var project: Project?
+    var posts = [Post]()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imagePicker.delegate = self
         loadProject()
-//        loadPosts()
+        loadPosts()
     }
 
     func loadProject() {
         var projectTitle = "New Project"
         
-        if projectId == nil {
+        if project == nil {
+            project = Project(id: NSUUID().uuidString, title: projectTitle)
             let databaseRef = FIRDatabase.database().reference()
             let user = FIRAuth.auth()?.currentUser
-            databaseRef.child("projects/\(user!.uid)/\(NSUUID().uuidString)/title").setValue(projectTitle)
+            databaseRef.child("user-projects/\(user!.uid)/\(project!.id)/title").setValue(projectTitle)
         } else {
-            projectTitle = projectId!
+            projectTitle = project!.title
         }
         self.projectTitletextField!.text = projectTitle
     }
     
-//    func loadPosts() {
-//        let databaseRef = FIRDatabase.database().reference()
-//        let projectPosts = databaseRef.child("project-posts").child(projectId!)
-//        
-//        projectPosts.observe(.childAdded, with: { (snapshot) -> Void in
-//            let projectData = snapshot.value as! [String: String]
-//            self.projects.append(projectData["title"] as! String)
-//            self.projectsTableView.insertRows(at: [IndexPath(row: self.projects.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
-//        })
-//    }
-    
-    
-    // Table view
-    
-//    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "PostsTableViewCell", for: indexPath) as! ProjectsTableViewCell
-//        
-//        cell.textLabel?.text = posts[indexPath.row]
-//        return cell
-//    }
-//    
-//    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return posts.count
-//    }
-
-    
-    // Create a post
-
-    @IBAction func openCamera(_ sender: UIButton) {
-        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera))
-        {
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-            self.present(imagePicker, animated: true, completion: nil)
-        } else {
-            print("no camera :(")
-        }
+    func loadPosts() {
+        let databaseRef = FIRDatabase.database().reference()
+        
+        databaseRef.child("project-posts/\(project!.id)").observe(.childAdded, with: { (snapshot) -> Void in
+            let postData = snapshot.value as! [String: AnyObject]
+            let imageUrl = postData["imageDownloadUrl"] as! String
+            self.posts.append(Post(id: snapshot.key, imageDownloadUrl: imageUrl))
+            self.postsTableView.insertRows(at: [IndexPath(row: self.posts.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
+        })
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    
+    // TableView
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostsTableViewCell", for: indexPath) as! PostsTableViewCell
+        let url = URL(string: posts[indexPath.row].imageDownloadUrl)
+        let data = try! Data(contentsOf: url!)
+        cell.imageView?.image = UIImage(data: data)
+        return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return posts.count
+    }
+
+    
+    // ImagePicker
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         let data = UIImageJPEGRepresentation(image, 0.1)
         let storageRef = FIRStorage.storage().reference()
-        let imageId = NSUUID().uuidString
-        let imageRef = storageRef.child("posts/images/\(imageId).jpeg")
+        let postId = NSUUID().uuidString
+        let imagePath = "posts/\(postId)/image.jpeg"
+        let imageRef = storageRef.child(imagePath)
         let metadata = FIRStorageMetadata()
         metadata.contentType = "image/jpeg"
         
@@ -80,11 +76,9 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
             if (error != nil) {
                 print("counldn't upload", error)
             } else {
-                print("uploaded", metadata!.downloadURL())
+                print("uploaded")
                 let databaseRef = FIRDatabase.database().reference()
-                let user = FIRAuth.auth()?.currentUser
-                let postId = NSUUID().uuidString
-                databaseRef.child("project-posts/\(self.projectId!)/\(postId)/imageId").setValue(imageId)
+                databaseRef.child("project-posts/\(self.project!.id)/\(postId)/imageDownloadUrl").setValue(metadata!.downloadURL()?.absoluteString)
             }
         }
         
@@ -99,7 +93,16 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         print("finished picking image")
     }
-
+    
+    @IBAction func openCamera(_ sender: UIButton) {
+        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera))
+        {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            self.present(imagePicker, animated: true, completion: nil)
+        } else {
+            print("no camera :(")
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

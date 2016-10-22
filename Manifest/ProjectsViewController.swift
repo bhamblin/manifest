@@ -3,7 +3,7 @@ import Firebase
 
 class ProjectsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var projects = [String]()
+    var projects = [Project]()
     
     @IBOutlet weak var projectsTableView: UITableView!
     
@@ -12,11 +12,13 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let databaseRef = FIRDatabase.database().reference()
         let user = FIRAuth.auth()?.currentUser
-        let projectsRef = databaseRef.child("projects/\(user!.uid)")
+        let projectsRef = databaseRef.child("user-projects/\(user!.uid)")
         
         projectsRef.observe(.childAdded, with: { (snapshot) -> Void in
-            let projectData = snapshot.value as! [String: AnyObject]
-            self.projects.append(projectData["title"] as! String)
+            let projectData = snapshot.value as! [String: String]
+            
+            let project = Project(id: snapshot.key, title: projectData["title"]!)
+            self.projects.append(project)
             
             self.projectsTableView.insertRows(at: [IndexPath(row: self.projects.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
         })
@@ -26,7 +28,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         if segue.identifier == "ShowProject" {
             let controller = segue.destination as! ProjectViewController
             if (sender as? ProjectsTableViewCell) != nil {
-                controller.projectId = projects[self.projectsTableView.indexPathForSelectedRow!.row]
+                controller.project = projects[self.projectsTableView.indexPathForSelectedRow!.row]
             }
         }
     }
@@ -37,7 +39,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsTableViewCell", for: indexPath) as! ProjectsTableViewCell
 
-        cell.textLabel?.text = projects[indexPath.row]
+        cell.textLabel?.text = projects[indexPath.row].title
         return cell
     }
 
