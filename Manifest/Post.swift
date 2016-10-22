@@ -1,11 +1,11 @@
-import Foundation
+import UIKit
 
 class Post {
     var id: String
-    var imageDownloadUrl: String
+    var thumbnail: UIImage
     
-    init(id: String, imageDownloadUrl: String) {
+    init(id: String, thumbnail: UIImage) {
         self.id = id
-        self.imageDownloadUrl = imageDownloadUrl
+        self.thumbnail = thumbnail
     }
 }

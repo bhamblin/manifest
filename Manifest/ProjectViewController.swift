@@ -38,8 +38,11 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         databaseRef.child("project-posts/\(project!.id)").observe(.childAdded, with: { (snapshot) -> Void in
             let postData = snapshot.value as! [String: AnyObject]
-            let imageUrl = postData["imageDownloadUrl"] as! String
-            self.posts.append(Post(id: snapshot.key, imageDownloadUrl: imageUrl))
+            let imageThumbnailUrl = postData["thumbnailImage"] as! String
+            let url = URL(string: postData["thumbnailImage"] as! String)
+            let imageData = try! Data(contentsOf: url!)
+            let image = UIImage(data: imageData)!
+            self.posts.append(Post(id: snapshot.key, thumbnail: image))
             self.postsTableView.insertRows(at: [IndexPath(row: self.posts.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
         })
     }
@@ -49,9 +52,8 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostsTableViewCell", for: indexPath) as! PostsTableViewCell
-        let url = URL(string: posts[indexPath.row].imageDownloadUrl)
-        let data = try! Data(contentsOf: url!)
-        cell.imageView?.image = UIImage(data: data)
+        cell.imageView?.image = posts[indexPath.row].thumbnail
+        
         return cell
     }
     
@@ -64,23 +66,10 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let data = UIImageJPEGRepresentation(image, 0.1)
-        let storageRef = FIRStorage.storage().reference()
+
         let postId = NSUUID().uuidString
-        let imagePath = "posts/\(postId)/image.jpeg"
-        let imageRef = storageRef.child(imagePath)
-        let metadata = FIRStorageMetadata()
-        metadata.contentType = "image/jpeg"
-        
-        imageRef.put(data!, metadata: metadata) { metadata, error in
-            if (error != nil) {
-                print("counldn't upload", error)
-            } else {
-                print("uploaded")
-                let databaseRef = FIRDatabase.database().reference()
-                databaseRef.child("project-posts/\(self.project!.id)/\(postId)/imageDownloadUrl").setValue(metadata!.downloadURL()?.absoluteString)
-            }
-        }
+        uploadImage(image, name: "original", postId: postId)
+        uploadImage(image, name: "thumbnail", postId: postId, withSize: CGSize(width: 100, height: 100))
         
         dismiss(animated: true, completion: nil)
     }
@@ -102,6 +91,52 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
         } else {
             print("no camera :(")
         }
+    }
+    
+    func uploadImage(_ image: UIImage, name: String, postId: String, withSize size: CGSize? = nil) {
+        let databaseRef = FIRDatabase.database().reference()
+        let storageRef = FIRStorage.storage().reference()
+        let metadata = FIRStorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        let imageData = UIImageJPEGRepresentation(size != nil ? resizeImage(image, size!) : image, 0.1)
+        let imagePath = "posts/\(postId)/\(name).jpeg"
+        let imageRef = storageRef.child(imagePath)
+        
+        imageRef.put(imageData!, metadata: metadata) { metadata, error in
+            if (error != nil) {
+                print("counldn't upload original", error)
+            } else {
+                databaseRef.child("project-posts/\(self.project!.id)/\(postId)/\(name)Image").setValue(metadata!.downloadURL()?.absoluteString)
+            }
+        }
+    }
+    
+    func resizeImage(_ image: UIImage, _ targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: newSize)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
     
     override func didReceiveMemoryWarning() {
