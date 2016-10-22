@@ -17,7 +17,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBAction func returnKey(_ sender: AnyObject) {
-        sender.resignFirstResponder()
+        _ = sender.resignFirstResponder()
     }
     
     @IBAction func handleSignUp(_ sender: AnyObject) {

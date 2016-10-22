@@ -15,7 +15,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBAction func returnKey(_ sender: AnyObject) {
-        sender.resignFirstResponder()
+        _ = sender.resignFirstResponder()
     }
     
     @IBAction func handleSignIn(_ sender: AnyObject) {
@@ -29,7 +29,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func handlePop(_ sender: AnyObject) {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
