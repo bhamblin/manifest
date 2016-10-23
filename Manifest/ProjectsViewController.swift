@@ -21,6 +21,16 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             self.projectsTableView.insertRows(at: [IndexPath(row: self.projects.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
         })
+
+        projectsRef.observe(FIRDataEventType.childRemoved, with: { (snapshot) -> Void in
+            let projectId = snapshot.key as String
+            for (index, value) in self.projects.enumerated() {
+                if value.id == projectId {
+                    self.projects.remove(at: index)
+                    self.projectsTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+            }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {

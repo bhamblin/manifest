@@ -8,7 +8,7 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     let imagePicker = UIImagePickerController()
     
-    var project: Project?
+    var project: Project!
     var posts = [Post]()
         
     override func viewDidLoad() {
@@ -91,6 +91,16 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
         } else {
             print("no camera :(")
         }
+    }
+    
+    @IBAction func deleteProject(_ sender: AnyObject) {
+        let user = FIRAuth.auth()?.currentUser
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("feed-projects/\(project.id)").removeValue()
+        databaseRef.child("project-posts/\(project.id)").removeValue()
+        databaseRef.child("user-projects/\(user!.uid)/\(project.id)").removeValue()
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
     func uploadImage(_ image: UIImage, name: String, postId: String, withSize size: CGSize? = nil) {
