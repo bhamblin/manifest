@@ -16,14 +16,13 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         projectsRef.observe(.childAdded, with: { (snapshot) -> Void in
             let projectData = snapshot.value as! [String: String]
-            
-            let project = Project(id: snapshot.key, title: projectData["title"]!)
+            let project = Project(id: snapshot.key, title: projectData["title"]!, thumbnailUrl: projectData["thumbnail"])
             self.projects.append(project)
             
             self.projectsTableView.insertRows(at: [IndexPath(row: self.projects.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
         })
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowProject" {
             let controller = segue.destination as! ProjectViewController

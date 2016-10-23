@@ -38,8 +38,7 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         databaseRef.child("project-posts/\(project!.id)").observe(.childAdded, with: { (snapshot) -> Void in
             let postData = snapshot.value as! [String: AnyObject]
-            let imageThumbnailUrl = postData["thumbnailImage"] as! String
-            let url = URL(string: postData["thumbnailImage"] as! String)
+            let url = URL(string: postData["thumbnail"] as! String)
             let imageData = try! Data(contentsOf: url!)
             let image = UIImage(data: imageData)!
             self.posts.append(Post(id: snapshot.key, thumbnail: image))
@@ -52,8 +51,7 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostsTableViewCell", for: indexPath) as! PostsTableViewCell
-        cell.imageView?.image = posts[indexPath.row].thumbnail
-        
+        cell.postImageView?.image = posts[indexPath.row].thumbnail        
         return cell
     }
     
@@ -107,7 +105,9 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
             if (error != nil) {
                 print("counldn't upload original", error)
             } else {
-                databaseRef.child("project-posts/\(self.project!.id)/\(postId)/\(name)Image").setValue(metadata!.downloadURL()?.absoluteString)
+                databaseRef.child("project-posts/\(self.project!.id)/\(postId)/\(name)").setValue(metadata!.downloadURL()?.absoluteString)
+                databaseRef.child("feed-projects/\(self.project!.id)/thumbnail").setValue(metadata!.downloadURL()?.absoluteString)
+                databaseRef.child("feed-projects/\(self.project!.id)/title").setValue(self.project?.title)
             }
         }
     }
