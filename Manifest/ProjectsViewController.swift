@@ -9,7 +9,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         let databaseRef = FIRDatabase.database().reference()
         let user = FIRAuth.auth()?.currentUser
         let projectsRef = databaseRef.child("user-projects/\(user!.uid)")
@@ -21,6 +21,13 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             self.projectsTableView.insertRows(at: [IndexPath(row: self.projects.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated) // No need for semicolon
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

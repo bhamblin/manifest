@@ -14,6 +14,8 @@ class ProjectViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+
         imagePicker.delegate = self
         loadProject()
         loadPosts()
