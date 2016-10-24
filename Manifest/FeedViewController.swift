@@ -9,14 +9,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if FIRAuth.auth()?.currentUser != nil {
+            loadProjects()
+        }
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let user = FIRAuth.auth()?.currentUser {
-            loadProjects()
-        } else {
+        if FIRAuth.auth()?.currentUser == nil {
             let signUpNavigationController = self.storyboard!.instantiateViewController(withIdentifier: "SignUpNavigationController") as! UINavigationController
             self.navigationController?.present(signUpNavigationController, animated: true)
         }
