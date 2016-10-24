@@ -17,6 +17,7 @@
 		59A72FA01DB30185006E84C4 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A72F9F1DB30185006E84C4 /* ProjectViewController.swift */; };
 		682B64E35DE5E03FF99DCEA1 /* Pods_Manifest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F7DD53316C6C346E24E944 /* Pods_Manifest.framework */; };
 		8B1FDE6A1DBD7FCF00F1ABE1 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1FDE691DBD7FCF00F1ABE1 /* FeedTableViewCell.swift */; };
+		8B1FDE6E1DBD8A6B00F1ABE1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1FDE6D1DBD8A6B00F1ABE1 /* ProfileViewController.swift */; };
 		8B76AF071DAAE49D006EAF84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B76AF061DAAE49D006EAF84 /* AppDelegate.swift */; };
 		8B76AF091DAAE49D006EAF84 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B76AF081DAAE49D006EAF84 /* SignUpViewController.swift */; };
 		8B76AF0C1DAAE49D006EAF84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B76AF0A1DAAE49D006EAF84 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		59A72F9F1DB30185006E84C4 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		89F7DD53316C6C346E24E944 /* Pods_Manifest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Manifest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1FDE691DBD7FCF00F1ABE1 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		8B1FDE6D1DBD8A6B00F1ABE1 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8B76AF031DAAE49D006EAF84 /* Manifest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Manifest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B76AF061DAAE49D006EAF84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B76AF081DAAE49D006EAF84 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				59A72F9F1DB30185006E84C4 /* ProjectViewController.swift */,
 				5948A9711DAAFFEB005850E0 /* SignInViewController.swift */,
 				8B76AF081DAAE49D006EAF84 /* SignUpViewController.swift */,
+				8B1FDE6D1DBD8A6B00F1ABE1 /* ProfileViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				8B76AF071DAAE49D006EAF84 /* AppDelegate.swift in Sources */,
 				5948A9741DAAFFFC005850E0 /* FeedViewController.swift in Sources */,
 				5948A9721DAAFFEB005850E0 /* SignInViewController.swift in Sources */,
+				8B1FDE6E1DBD8A6B00F1ABE1 /* ProfileViewController.swift in Sources */,
 				5951F02A1DBB29CF002A6085 /* Project.swift in Sources */,
 				598D2C351DB43D2400C52E07 /* ProjectsViewController.swift in Sources */,
 				5951F0221DBB2313002A6085 /* PostsTableViewCell.swift in Sources */,

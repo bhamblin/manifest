@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="w8S-HE-1HN">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="w8S-HE-1HN">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -27,7 +27,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="340"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V8B-Vj-dT2" id="2Ci-2a-Cj1">
-                                            <frame key="frameInset" width="375" height="340"/>
+                                            <frame key="frameInset" width="375" height="339"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yHQ-u9-vwK">
@@ -61,13 +61,7 @@
                             <constraint firstItem="3CA-M8-1fA" firstAttribute="top" secondItem="eq7-On-7h4" secondAttribute="bottom" id="yDU-Bc-K0d"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="A61-DE-TXH">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="x0H-mZ-aeW">
-                            <connections>
-                                <action selector="handleLogout:" destination="QSx-v6-Nti" id="tFJ-bz-zhM"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="A61-DE-TXH"/>
                     <connections>
                         <outlet property="feedTableView" destination="eq7-On-7h4" id="dhu-Ae-sMa"/>
                     </connections>
@@ -98,14 +92,14 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" showsReorderControl="YES" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="ProjectsTableViewCell" textLabel="i1R-l0-U0x" rowHeight="100" style="IBUITableViewCellStyleDefault" id="HNa-at-VkS" customClass="ProjectsTableViewCell" customModule="Manifest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HNa-at-VkS" id="aOz-SG-k6E">
-                                            <frame key="frameInset" width="1000" height="100"/>
+                                            <frame key="frameInset" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i1R-l0-U0x">
-                                                    <frame key="frameInset" minX="164" width="672" height="100"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="100"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -175,7 +169,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostsTableViewCell" rowHeight="100" id="2Ov-cV-Ojg" customClass="PostsTableViewCell" customModule="Manifest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="100"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Ov-cV-Ojg" id="xAK-Jn-5Ld">
                                             <frame key="frameInset" width="375" height="99"/>
@@ -557,6 +551,7 @@
                     <connections>
                         <segue destination="3mn-LL-VKj" kind="relationship" relationship="viewControllers" id="dE8-5c-ZeL"/>
                         <segue destination="N8b-pt-Hlw" kind="relationship" relationship="viewControllers" id="OXI-Zy-nVv"/>
+                        <segue destination="QyQ-UL-mEH" kind="relationship" relationship="viewControllers" id="Qzh-cI-yyC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUN-1J-5OF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -581,6 +576,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AUt-ZN-c3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1109.5999999999999" y="-471.8140929535233"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="N4P-6N-0Tn">
+            <objects>
+                <navigationController id="QyQ-UL-mEH" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="FtH-bp-pyv"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z9T-TV-mwK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="igh-Qg-WVV" kind="relationship" relationship="rootViewController" id="Muh-Qw-lEW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iml-Wx-YBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1097" y="-1974"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="DkZ-Cx-dvD">
+            <objects>
+                <viewController id="igh-Qg-WVV" customClass="ProfileViewController" customModule="Manifest" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pnN-li-2ft"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Kj-vV-xdB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iu8-Pi-Os9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="bV5-Vw-Boq">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="RQf-lG-zyp">
+                            <connections>
+                                <action selector="handleLogout:" destination="igh-Qg-WVV" id="A1X-C7-sf2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kq5-8d-QlK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2020" y="-1974"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lxQ-F6-e5G">
