@@ -34,10 +34,8 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated) // No need for semicolon
-        
+        super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,7 +53,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsTableViewCell", for: indexPath) as! ProjectsTableViewCell
 
-        cell.textLabel?.text = projects[indexPath.row].title
+        cell.textLabel?.text = projects[indexPath.row].title == "" ? "No Title" : projects[indexPath.row].title
         return cell
     }
 

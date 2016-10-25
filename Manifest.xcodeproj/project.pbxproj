@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5921C44F1DBDBA250080293E /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5921C44E1DBDBA250080293E /* PostsViewController.swift */; };
+		5921C4511DBDC19D0080293E /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5921C4501DBDC19D0080293E /* ProjectViewController.swift */; };
 		5948A9721DAAFFEB005850E0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5948A9711DAAFFEB005850E0 /* SignInViewController.swift */; };
 		5948A9741DAAFFFC005850E0 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5948A9731DAAFFFC005850E0 /* FeedViewController.swift */; };
 		5951F0221DBB2313002A6085 /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951F0211DBB2313002A6085 /* PostsTableViewCell.swift */; };
@@ -14,7 +16,6 @@
 		5951F02A1DBB29CF002A6085 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5951F0291DBB29CF002A6085 /* Project.swift */; };
 		598D2C351DB43D2400C52E07 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D2C341DB43D2400C52E07 /* ProjectsViewController.swift */; };
 		598D2C371DB455D100C52E07 /* ProjectsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D2C361DB455D100C52E07 /* ProjectsTableViewCell.swift */; };
-		59A72FA01DB30185006E84C4 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A72F9F1DB30185006E84C4 /* ProjectViewController.swift */; };
 		682B64E35DE5E03FF99DCEA1 /* Pods_Manifest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F7DD53316C6C346E24E944 /* Pods_Manifest.framework */; };
 		8B1FDE6A1DBD7FCF00F1ABE1 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1FDE691DBD7FCF00F1ABE1 /* FeedTableViewCell.swift */; };
 		8B1FDE6E1DBD8A6B00F1ABE1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1FDE6D1DBD8A6B00F1ABE1 /* ProfileViewController.swift */; };
@@ -29,6 +30,8 @@
 /* Begin PBXFileReference section */
 		2FD501CE2AA1C679FD294B4E /* Pods-Manifest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manifest.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manifest/Pods-Manifest.release.xcconfig"; sourceTree = "<group>"; };
 		4201526614A76F9134B27782 /* Pods-Manifest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manifest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Manifest/Pods-Manifest.debug.xcconfig"; sourceTree = "<group>"; };
+		5921C44E1DBDBA250080293E /* PostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
+		5921C4501DBDC19D0080293E /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		5948A9711DAAFFEB005850E0 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		5948A9731DAAFFFC005850E0 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		5951F0211DBB2313002A6085 /* PostsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
@@ -36,7 +39,6 @@
 		5951F0291DBB29CF002A6085 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		598D2C341DB43D2400C52E07 /* ProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		598D2C361DB455D100C52E07 /* ProjectsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsTableViewCell.swift; sourceTree = "<group>"; };
-		59A72F9F1DB30185006E84C4 /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		89F7DD53316C6C346E24E944 /* Pods_Manifest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Manifest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1FDE691DBD7FCF00F1ABE1 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		8B1FDE6D1DBD8A6B00F1ABE1 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -67,10 +69,11 @@
 			children = (
 				5948A9731DAAFFFC005850E0 /* FeedViewController.swift */,
 				598D2C341DB43D2400C52E07 /* ProjectsViewController.swift */,
-				59A72F9F1DB30185006E84C4 /* ProjectViewController.swift */,
-				5948A9711DAAFFEB005850E0 /* SignInViewController.swift */,
-				8B76AF081DAAE49D006EAF84 /* SignUpViewController.swift */,
+				5921C4501DBDC19D0080293E /* ProjectViewController.swift */,
+				5921C44E1DBDBA250080293E /* PostsViewController.swift */,
 				8B1FDE6D1DBD8A6B00F1ABE1 /* ProfileViewController.swift */,
+				8B76AF081DAAE49D006EAF84 /* SignUpViewController.swift */,
+				5948A9711DAAFFEB005850E0 /* SignInViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -180,7 +183,7 @@
 				TargetAttributes = {
 					8B76AF021DAAE49D006EAF84 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 58C62NKYWK;
+						DevelopmentTeam = B723N4J3AB;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -271,16 +274,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B76AF091DAAE49D006EAF84 /* SignUpViewController.swift in Sources */,
-				59A72FA01DB30185006E84C4 /* ProjectViewController.swift in Sources */,
 				598D2C371DB455D100C52E07 /* ProjectsTableViewCell.swift in Sources */,
 				8B76AF071DAAE49D006EAF84 /* AppDelegate.swift in Sources */,
 				5948A9741DAAFFFC005850E0 /* FeedViewController.swift in Sources */,
 				5948A9721DAAFFEB005850E0 /* SignInViewController.swift in Sources */,
 				8B1FDE6E1DBD8A6B00F1ABE1 /* ProfileViewController.swift in Sources */,
+				5921C44F1DBDBA250080293E /* PostsViewController.swift in Sources */,
 				5951F02A1DBB29CF002A6085 /* Project.swift in Sources */,
 				598D2C351DB43D2400C52E07 /* ProjectsViewController.swift in Sources */,
 				5951F0221DBB2313002A6085 /* PostsTableViewCell.swift in Sources */,
 				5951F0281DBB29AE002A6085 /* Post.swift in Sources */,
+				5921C4511DBDC19D0080293E /* ProjectViewController.swift in Sources */,
 				8B1FDE6A1DBD7FCF00F1ABE1 /* FeedTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
