@@ -60,12 +60,22 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // ImagePicker
     
+    @IBAction func addImage(_ sender: UIButton) {
+        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary))
+        {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            self.present(imagePicker, animated: true, completion: nil)
+        } else {
+            print("no camera :(")
+        }
+    }
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         let postId = NSUUID().uuidString
         uploadImage(image, name: "original", postId: postId)
-        uploadImage(image, name: "thumbnail", postId: postId, withSize: CGSize(width: 100, height: 100))
+        uploadImage(image, name: "thumbnail", postId: postId, withSize: CGSize(width: 375, height: 375))
         
         dismiss(animated: true, completion: nil)
     }
@@ -77,16 +87,6 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         print("finished picking image")
-    }
-    
-    @IBAction func openCamera(_ sender: UIButton) {
-        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera))
-        {
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-            self.present(imagePicker, animated: true, completion: nil)
-        } else {
-            print("no camera :(")
-        }
     }
     
     func uploadImage(_ image: UIImage, name: String, postId: String, withSize size: CGSize? = nil) {
@@ -128,7 +128,7 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: newSize)
         
         // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1)
         image.draw(in: rect)
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
