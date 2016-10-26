@@ -19,10 +19,10 @@
 		682B64E35DE5E03FF99DCEA1 /* Pods_Manifest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F7DD53316C6C346E24E944 /* Pods_Manifest.framework */; };
 		8B1FDE6A1DBD7FCF00F1ABE1 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1FDE691DBD7FCF00F1ABE1 /* FeedTableViewCell.swift */; };
 		8B1FDE6E1DBD8A6B00F1ABE1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1FDE6D1DBD8A6B00F1ABE1 /* ProfileViewController.swift */; };
+		8B1FDE701DC045F600F1ABE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B1FDE6F1DC045F600F1ABE1 /* Assets.xcassets */; };
 		8B76AF071DAAE49D006EAF84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B76AF061DAAE49D006EAF84 /* AppDelegate.swift */; };
 		8B76AF091DAAE49D006EAF84 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B76AF081DAAE49D006EAF84 /* SignUpViewController.swift */; };
 		8B76AF0C1DAAE49D006EAF84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B76AF0A1DAAE49D006EAF84 /* Main.storyboard */; };
-		8B76AF0E1DAAE49D006EAF84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B76AF0D1DAAE49D006EAF84 /* Assets.xcassets */; };
 		8B76AF111DAAE49D006EAF84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B76AF0F1DAAE49D006EAF84 /* LaunchScreen.storyboard */; };
 		8B76AF191DAAEE92006EAF84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B76AF181DAAEE92006EAF84 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -42,11 +42,11 @@
 		89F7DD53316C6C346E24E944 /* Pods_Manifest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Manifest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1FDE691DBD7FCF00F1ABE1 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		8B1FDE6D1DBD8A6B00F1ABE1 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8B1FDE6F1DC045F600F1ABE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B76AF031DAAE49D006EAF84 /* Manifest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Manifest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B76AF061DAAE49D006EAF84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B76AF081DAAE49D006EAF84 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8B76AF0B1DAAE49D006EAF84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8B76AF0D1DAAE49D006EAF84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B76AF101DAAE49D006EAF84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B76AF121DAAE49D006EAF84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B76AF181DAAEE92006EAF84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -132,10 +132,10 @@
 				5951F0251DBB2931002A6085 /* TableViewCells */,
 				5951F0261DBB2997002A6085 /* Models */,
 				8B76AF0A1DAAE49D006EAF84 /* Main.storyboard */,
-				8B76AF0D1DAAE49D006EAF84 /* Assets.xcassets */,
 				8B76AF0F1DAAE49D006EAF84 /* LaunchScreen.storyboard */,
 				8B76AF181DAAEE92006EAF84 /* GoogleService-Info.plist */,
 				8B76AF121DAAE49D006EAF84 /* Info.plist */,
+				8B1FDE6F1DC045F600F1ABE1 /* Assets.xcassets */,
 			);
 			path = Manifest;
 			sourceTree = "<group>";
@@ -183,7 +183,7 @@
 				TargetAttributes = {
 					8B76AF021DAAE49D006EAF84 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = B723N4J3AB;
+						DevelopmentTeam = 58C62NKYWK;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -213,7 +213,7 @@
 			files = (
 				8B76AF111DAAE49D006EAF84 /* LaunchScreen.storyboard in Resources */,
 				8B76AF191DAAEE92006EAF84 /* GoogleService-Info.plist in Resources */,
-				8B76AF0E1DAAE49D006EAF84 /* Assets.xcassets in Resources */,
+				8B1FDE701DC045F600F1ABE1 /* Assets.xcassets in Resources */,
 				8B76AF0C1DAAE49D006EAF84 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="w8S-HE-1HN">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="w8S-HE-1HN">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -464,7 +464,10 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="vih-je-9JD">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="3mn-LL-VKj" kind="relationship" relationship="viewControllers" id="dE8-5c-ZeL"/>
@@ -480,9 +483,12 @@
         <scene sceneID="eIc-Hj-Ckq">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3mn-LL-VKj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="recents" id="4Yx-Ff-vKs"/>
+                    <tabBarItem key="tabBarItem" image="home-off" selectedImage="home-on" id="4Yx-Ff-vKs">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7h9-nf-cFU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7h9-nf-cFU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -526,6 +532,7 @@
                                     <segment title="Photos"/>
                                     <segment title="Details"/>
                                 </segments>
+                                <color key="tintColor" red="0.96862745100000003" green="0.41176470590000003" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="handleViewChange:" destination="j7V-ob-azk" eventType="valueChanged" id="Egz-rX-e29"/>
                                 </connections>
@@ -544,6 +551,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="tCJ-Vy-mh8">
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="trash" id="bQO-Ag-2qp">
+                            <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="deleteProject:" destination="j7V-ob-azk" id="KBv-lL-UIs"/>
                             </connections>
@@ -562,8 +570,10 @@
         <scene sceneID="N4P-6N-0Tn">
             <objects>
                 <navigationController id="QyQ-UL-mEH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="FtH-bp-pyv"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z9T-TV-mwK">
+                    <tabBarItem key="tabBarItem" image="profile-off" selectedImage="profile-on" id="FtH-bp-pyv">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="z9T-TV-mwK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -606,7 +616,9 @@
         <scene sceneID="lxQ-F6-e5G">
             <objects>
                 <navigationController title="Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="N8b-pt-Hlw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="XC5-uy-jSd"/>
+                    <tabBarItem key="tabBarItem" image="projects-off" selectedImage="projects-on" id="XC5-uy-jSd">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oe1-c5-0tA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -626,8 +638,8 @@
             <objects>
                 <viewController id="eEB-BW-kzp" customClass="PostsViewController" customModule="Manifest" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tfV-cb-zG5"/>
-                        <viewControllerLayoutGuide type="bottom" id="pC5-vL-qFb"/>
+                        <viewControllerLayoutGuide type="top" id="Mgc-xk-36v"/>
+                        <viewControllerLayoutGuide type="bottom" id="ijd-3P-q8h"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Wju-EH-atn">
                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="510"/>
@@ -685,8 +697,8 @@
             <objects>
                 <viewController id="5Bb-56-uu5" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="IcF-6r-dww"/>
-                        <viewControllerLayoutGuide type="bottom" id="V3V-ir-v5m"/>
+                        <viewControllerLayoutGuide type="top" id="964-N7-FoL"/>
+                        <viewControllerLayoutGuide type="bottom" id="6FQ-Tg-Wuw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3kM-bD-GLc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
@@ -699,7 +711,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="home-off" width="22" height="22"/>
+        <image name="home-on" width="22" height="22"/>
         <image name="manifest-logo-black" width="393" height="60"/>
+        <image name="profile-off" width="22" height="22"/>
+        <image name="profile-on" width="22" height="22"/>
+        <image name="projects-off" width="22" height="22"/>
+        <image name="projects-on" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="L01-4x-NJC"/>
