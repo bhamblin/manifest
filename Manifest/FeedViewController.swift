@@ -24,7 +24,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func loadProjects() {
         let databaseRef = FIRDatabase.database().reference()
-        let user = FIRAuth.auth()?.currentUser
+        _ = FIRAuth.auth()?.currentUser
         let projectsRef = databaseRef.child("feed-projects")
         
         projectsRef.observe(.childAdded, with: { (snapshot) -> Void in
