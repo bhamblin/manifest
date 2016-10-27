@@ -41,7 +41,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowProject" {
             let controller = segue.destination as! ProjectViewController
-            if (sender as? ProjectsTableViewCell) != nil {
+            if (sender as? UITableViewCell) != nil {
                 controller.project = projects[self.projectsTableView.indexPathForSelectedRow!.row]
             }
         }
@@ -52,8 +52,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsTableViewCell", for: indexPath) as! ProjectsTableViewCell
-
-        cell.textLabel?.text = projects[indexPath.row].title == "" ? "No Title" : projects[indexPath.row].title
+        cell.thumbnailImageView.image = projects[indexPath.row].thumbnail
         return cell
     }
 

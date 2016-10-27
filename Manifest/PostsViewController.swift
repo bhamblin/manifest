@@ -28,7 +28,6 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let databaseRef = FIRDatabase.database().reference()
         let user = FIRAuth.auth()?.currentUser
         databaseRef.child("user-projects/\(user!.uid)/\(project.id)/title").setValue(project.title)
-
     }
     
     func loadPosts() {
@@ -90,6 +89,7 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func uploadImage(_ image: UIImage, name: String, postId: String, withSize size: CGSize? = nil) {
+        let user = FIRAuth.auth()?.currentUser
         let databaseRef = FIRDatabase.database().reference()
         let storageRef = FIRStorage.storage().reference()
         let metadata = FIRStorageMetadata()
@@ -105,7 +105,7 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             } else {
                 databaseRef.child("project-posts/\(self.project!.id)/\(postId)/\(name)").setValue(metadata!.downloadURL()?.absoluteString)
                 databaseRef.child("feed-projects/\(self.project!.id)/thumbnail").setValue(metadata!.downloadURL()?.absoluteString)
-                databaseRef.child("feed-projects/\(self.project!.id)/title").setValue(self.project?.title)
+                databaseRef.child("user-projects/\(user!.uid)/\(self.project!.id)/thumbnail").setValue(metadata!.downloadURL()?.absoluteString)
             }
         }
     }
