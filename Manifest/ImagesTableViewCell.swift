@@ -3,6 +3,7 @@ import UIKit
 class ImagesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imageImageView: UIImageView!
+    @IBOutlet weak var publishedLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

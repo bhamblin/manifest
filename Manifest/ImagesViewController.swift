@@ -4,12 +4,24 @@ import Firebase
 class ImagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var imagesTableView: UITableView!
-    @IBOutlet weak var testlabel: UILabel!
 
     let imagePicker = UIImagePickerController()
     
     var project: Project!
     var images = [Image]()
+
+    @IBAction func publish(_ sender: Any) {
+        let databaseRef = FIRDatabase.database().reference()
+        let postId = databaseRef.child("posts").childByAutoId().key
+        for image in images {
+            if !image.published {
+                image.published = true
+                databaseRef.child("project-images/\(project!.id)/\(image.id)/published").setValue(true)
+                databaseRef.child("posts/\(postId)/images/\(image.id)").setValue(true)
+                // add thumbnail
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +39,18 @@ class ImagesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let url = URL(string: imageData["thumbnail"] as! String)
             let imageContents = try! Data(contentsOf: url!)
             let image = UIImage(data: imageContents)!
-            self.images.append(Image(id: snapshot.key, thumbnail: image))
+            self.images.append(Image(id: snapshot.key, thumbnail: image, published: imageData["published"] as! Bool))
             self.imagesTableView.insertRows(at: [IndexPath(row: self.images.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
+        })
+        
+        databaseRef.child("project-images/\(project!.id)").observe(.childChanged, with: { (snapshot) -> Void in
+            let imageData = snapshot.value as! [String: AnyObject]
+            for (index, image) in self.images.enumerated() {
+                if image.id == snapshot.key {
+                    let indexPath = IndexPath(row: index, section: 0)
+                    self.imagesTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+                }
+            }
         })
     }
     
@@ -38,6 +60,7 @@ class ImagesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImagesTableViewCell", for: indexPath) as! ImagesTableViewCell
         cell.imageImageView?.image = images[indexPath.row].thumbnail
+        cell.publishedLabel.text = images[indexPath.row].published ? "Published" : "Not published"
         return cell
     }
     
@@ -62,7 +85,6 @@ class ImagesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         let imageId = NSUUID().uuidString
-        uploadImage(image, name: "original", imageId: imageId)
         uploadImage(image, name: "thumbnail", imageId: imageId, withSize: CGSize(width: 375, height: 375))
         
         dismiss(animated: true, completion: nil)
@@ -90,14 +112,23 @@ class ImagesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         imageRef.put(imageData!, metadata: metadata) { metadata, error in
             if (error != nil) {
-                print("counldn't upload original", error as Any)
+                print("counldn't upload image", error as Any)
             } else {
+                let thumbnailUrl = metadata!.downloadURL()?.absoluteString
                 if self.project == nil {
-                    self.project = self.createProject()
+                    self.project = Project(id: NSUUID().uuidString, title: "", thumbnailUrl: thumbnailUrl)
+                    self.loadImages()
                 }
-                databaseRef.child("project-images/\(self.project!.id)/\(imageId)/\(name)").setValue(metadata!.downloadURL()?.absoluteString)
-                databaseRef.child("feed-projects/\(self.project!.id)/thumbnail").setValue(metadata!.downloadURL()?.absoluteString)
-                databaseRef.child("user-projects/\(user!.uid)/\(self.project!.id)/thumbnail").setValue(metadata!.downloadURL()?.absoluteString)
+                
+                databaseRef.updateChildValues([
+                    "project-images/\(self.project!.id)/\(imageId)": [
+                        "published":  false,
+                        name: thumbnailUrl
+                    ],
+                    "user-projects/\(user!.uid)/\(self.project.id)/title": "",
+                    "user-projects/\(user!.uid)/\(self.project.id)/thumbnail": thumbnailUrl,
+                    "feed-projects/\(self.project.id)/thumbnail": thumbnailUrl,
+                ])
             }
         }
     }
@@ -127,13 +158,5 @@ class ImagesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         UIGraphicsEndImageContext()
         
         return newImage!
-    }
-
-    func createProject() -> Project {
-        project = Project(id: NSUUID().uuidString, title: "")
-        let databaseRef = FIRDatabase.database().reference()
-        let user = FIRAuth.auth()?.currentUser
-        databaseRef.child("user-projects/\(user!.uid)/\(project.id)/title").setValue(project.title)
-        return project
     }
 }
