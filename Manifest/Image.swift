@@ -1,6 +1,6 @@
 import UIKit
 
-class Post {
+class Image {
     var id: String
     var thumbnail: UIImage
     

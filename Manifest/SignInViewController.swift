@@ -21,7 +21,7 @@ class SignInViewController: UIViewController {
     @IBAction func handleSignIn(_ sender: AnyObject) {
         FIRAuth.auth()?.signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
             if error != nil {
-                print("ERROR: ", error)
+                print("ERROR: ", error as! String)
             } else {
                 self.dismiss(animated: true, completion: nil)
             }

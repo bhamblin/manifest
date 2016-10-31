@@ -145,7 +145,7 @@
                                 <rect key="frame" x="127" y="92" width="121" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Posts"/>
+                                    <segment title="Images"/>
                                     <segment title="Details"/>
                                 </segments>
                             </segmentedControl>
@@ -160,7 +160,7 @@
                                 <rect key="frame" x="0.0" y="153" width="375" height="465"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="wdL-fH-qAC" kind="embed" identifier="ShowPosts" id="Yn3-eY-15e"/>
+                                    <segue destination="wdL-fH-qAC" kind="embed" identifier="ShowImages" id="Yn3-eY-15e"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -606,10 +606,10 @@
             </objects>
             <point key="canvasLocation" x="1110" y="-1240"/>
         </scene>
-        <!--Posts View Controller-->
+        <!--Images View Controller-->
         <scene sceneID="QqH-nS-GKr">
             <objects>
-                <viewController id="wdL-fH-qAC" customClass="PostsViewController" customModule="Manifest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wdL-fH-qAC" customClass="ImagesViewController" customModule="Manifest" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VwH-Zu-wys"/>
                         <viewControllerLayoutGuide type="bottom" id="vkW-fz-7tV"/>
@@ -623,7 +623,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostsTableViewCell" rowHeight="100" id="j6P-sb-8tx" customClass="PostsTableViewCell" customModule="Manifest" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImagesTableViewCell" rowHeight="100" id="j6P-sb-8tx" customClass="ImagesTableViewCell" customModule="Manifest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j6P-sb-8tx" id="6fy-DP-mpz">
@@ -637,7 +637,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="postImageView" destination="MNe-Sm-thd" id="YPT-DH-pDu"/>
+                                            <outlet property="imageImageView" destination="MNe-Sm-thd" id="0dQ-G1-NVl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -658,7 +658,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="postsTableView" destination="qhJ-Cx-03C" id="piH-HQ-2Tq"/>
+                        <outlet property="imagesTableView" destination="qhJ-Cx-03C" id="O7Z-Hd-1fg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RG6-LM-hGV" userLabel="First Responder" sceneMemberID="firstResponder"/>

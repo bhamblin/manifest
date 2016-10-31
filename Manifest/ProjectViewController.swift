@@ -4,17 +4,17 @@ import Firebase
 class ProjectViewController: UIViewController {
 
     @IBOutlet weak var detailsView: UIView!
-    @IBOutlet weak var postsView: UIView!
+    @IBOutlet weak var imagesView: UIView!
 
     var project: Project!
 
 //    @IBAction func handleViewChange(_ sender: UISegmentedControl) {
 //        if sender.selectedSegmentIndex == 0 {
 //            detailsView.isHidden = true
-//            postsView.isHidden = false
+//            imagesView.isHidden = false
 //        } else {
 //            detailsView.isHidden = false
-//            postsView.isHidden = true
+//            imagesView.isHidden = true
 //        }
 //    }
 
@@ -27,9 +27,9 @@ class ProjectViewController: UIViewController {
 
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowPosts" {
-            if let posts = segue.destination as? PostsViewController {
-                posts.project = project
+        if segue.identifier == "ShowImages" {
+            if let images = segue.destination as? ImagesViewController {
+                images.project = project
             }
         }
         if segue.identifier == "ShowDetails" {
@@ -41,7 +41,7 @@ class ProjectViewController: UIViewController {
         let user = FIRAuth.auth()?.currentUser
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("feed-projects/\(project.id)").removeValue()
-        databaseRef.child("project-posts/\(project.id)").removeValue()
+        databaseRef.child("project-images/\(project.id)").removeValue()
         databaseRef.child("user-projects/\(user!.uid)/\(project.id)").removeValue()
 
         self.navigationController?.popViewController(animated: true)

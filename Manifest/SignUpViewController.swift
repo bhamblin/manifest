@@ -23,7 +23,7 @@ class SignUpViewController: UIViewController {
     @IBAction func handleSignUp(_ sender: AnyObject) {
         FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
             if error != nil {
-                print("ERROR: ", error)
+                print("ERROR: ", error as! String)
             } else {
                 var ref: FIRDatabaseReference!
                 

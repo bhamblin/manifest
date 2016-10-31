@@ -1,8 +1,8 @@
 import UIKit
 
-class PostsTableViewCell: UITableViewCell {
+class ImagesTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var imageImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
