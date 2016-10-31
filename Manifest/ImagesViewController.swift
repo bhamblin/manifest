@@ -1,9 +1,9 @@
 import UIKit
 import Firebase
 
-class ImagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var imagesTableView: UITableView!
+    @IBOutlet weak var imagesCollectionView: UICollectionView!
 
     let imagePicker = UIImagePickerController()
     
@@ -40,7 +40,7 @@ class ImagesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let imageContents = try! Data(contentsOf: url!)
             let image = UIImage(data: imageContents)!
             self.images.append(Image(id: snapshot.key, thumbnail: image, published: imageData["published"] as! Bool))
-            self.imagesTableView.insertRows(at: [IndexPath(row: self.images.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
+            self.imagesCollectionView.insertItems(at: [IndexPath(row: self.images.count-1, section: 0)])
         })
         
         databaseRef.child("project-images/\(project!.id)").observe(.childChanged, with: { (snapshot) -> Void in
@@ -48,23 +48,23 @@ class ImagesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             for (index, image) in self.images.enumerated() {
                 if image.id == snapshot.key {
                     let indexPath = IndexPath(row: index, section: 0)
-                    self.imagesTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+                    self.imagesCollectionView.reloadItems(at: [indexPath])
                 }
             }
         })
     }
     
     
-    // TableView
+    // CollectionView
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ImagesTableViewCell", for: indexPath) as! ImagesTableViewCell
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
         cell.imageImageView?.image = images[indexPath.row].thumbnail
         cell.publishedLabel.text = images[indexPath.row].published ? "Published" : "Not published"
         return cell
     }
     
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
     
