@@ -1,10 +1,12 @@
 import UIKit
 import Firebase
 
-class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var imagesCollectionView: UICollectionView!
-
+    @IBOutlet weak var addImageButton: UIButton!
+    @IBOutlet weak var publishButton: UIButton!
+    
     let imagePicker = UIImagePickerController()
     
     var project: Project!
@@ -19,6 +21,11 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
                 databaseRef.child("project-images/\(project!.id)/\(image.id)/published").setValue(true)
                 databaseRef.child("posts/\(postId)/images/\(image.id)").setValue(true)
                 // add thumbnail
+
+                let indexOfImage = self.images.index(where: { $0 === image })!
+                let index = IndexPath(row: self.images.count - indexOfImage - 1, section: 0)
+                self.imagesCollectionView.reloadItems(at: [index])
+                self.updatePublishButton()
             }
         }
     }
@@ -27,6 +34,9 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         
         imagePicker.delegate = self
+        addImageButton.layer.cornerRadius = 4; // this value vary as per your desire
+        addImageButton.clipsToBounds = true;
+        disablePublishButton()
         observeImages()
     }
 
@@ -38,7 +48,25 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
             self.imagesCollectionView.insertItems(at: [IndexPath(row: 0, section: 0)])
             self.updatePublishButton()
         })
+    }
+    
+    func updatePublishButton() {
+        let draftCount = self.images.reduce(0, { (acc: Int, image: Image) -> Int in
+            return acc + (image.published ? 0 : 1)
         })
+        if draftCount > 0 {
+            self.publishButton.setTitle("Publish (\(draftCount))", for: .normal)
+            self.publishButton.backgroundColor = UIColor(red: 249/255, green: 104/255, blue: 109/255, alpha: 1.0)
+            self.publishButton.isEnabled = true
+        } else {
+            disablePublishButton()
+        }
+    }
+    
+    func disablePublishButton() {
+        self.publishButton.setTitle("Publish", for: .normal)
+        self.publishButton.backgroundColor = UIColor(red: 249/255, green: 104/255, blue: 109/255, alpha: 0.5)
+        self.publishButton.isEnabled = false
     }
     
     
@@ -46,13 +74,28 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
-        cell.imageImageView?.image = images[indexPath.row].thumbnail
-        cell.publishedLabel.text = images[indexPath.row].published ? "Published" : "Not published"
+        let reversedRow = images.count - indexPath.row - 1
+        cell.imageImageView?.image = images[reversedRow].thumbnail
+        cell.draftIcon.isHidden = images[reversedRow].published
         return cell
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
+        let size = imagesCollectionView.frame.size.width/2 - 4
+        return CGSize(width: size, height: size)
+    }
+    
+    //Use for interspacing
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8.0
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8.0
     }
     
     
@@ -104,7 +147,6 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
                 let thumbnailUrl = metadata!.downloadURL()?.absoluteString
                 if self.project == nil {
                     self.project = Project(id: NSUUID().uuidString, title: "", thumbnailUrl: thumbnailUrl)
-                    self.loadImages()
                 }
                 
                 databaseRef.updateChildValues([
