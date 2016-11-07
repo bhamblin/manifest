@@ -27,30 +27,17 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         
         imagePicker.delegate = self
-        loadImages()
+        observeImages()
     }
 
-    func loadImages() {
+    func observeImages() {
         guard project != nil else { return }
         
-        let databaseRef = FIRDatabase.database().reference()
-        databaseRef.child("project-images/\(project!.id)").observe(.childAdded, with: { (snapshot) -> Void in
-            let imageData = snapshot.value as! [String: AnyObject]
-            let url = URL(string: imageData["thumbnail"] as! String)
-            let imageContents = try! Data(contentsOf: url!)
-            let image = UIImage(data: imageContents)!
-            self.images.append(Image(id: snapshot.key, thumbnail: image, published: imageData["published"] as! Bool))
-            self.imagesCollectionView.insertItems(at: [IndexPath(row: self.images.count-1, section: 0)])
+        Image.observeChildAdded(for: self.project, with: { (image) in
+            self.images.append(image)
+            self.imagesCollectionView.insertItems(at: [IndexPath(row: 0, section: 0)])
+            self.updatePublishButton()
         })
-        
-        databaseRef.child("project-images/\(project!.id)").observe(.childChanged, with: { (snapshot) -> Void in
-            let imageData = snapshot.value as! [String: AnyObject]
-            for (index, image) in self.images.enumerated() {
-                if image.id == snapshot.key {
-                    let indexPath = IndexPath(row: index, section: 0)
-                    self.imagesCollectionView.reloadItems(at: [indexPath])
-                }
-            }
         })
     }
     
