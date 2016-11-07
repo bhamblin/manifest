@@ -21,6 +21,8 @@ class ProjectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.tabBarController?.tabBar.isHidden = true
+
 //        detailsView.isHidden = true
 //        postsView.isHidden = false
     }

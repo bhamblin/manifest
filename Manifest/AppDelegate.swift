@@ -15,9 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barTintColor = UIColor.black
         UITabBar.appearance().tintColor = UIColor.white
 
-        return true
-    
+        let greyColor = UIColor(red: 171/255, green: 177/255, blue: 182/255, alpha: 1.0)
+        UINavigationBar.appearance().clipsToBounds = true;
+        UINavigationBar.appearance().barTintColor = UIColor.white
+        UINavigationBar.appearance().tintColor = greyColor
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSForegroundColorAttributeName : greyColor
+        ]
         
+        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
