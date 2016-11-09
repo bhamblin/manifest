@@ -6,10 +6,13 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     var projects = [Project]()
     
     @IBOutlet weak var projectsTableView: UITableView!
+    @IBOutlet weak var createProjectButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        
+        createProjectButton.layer.cornerRadius = 4;
         let databaseRef = FIRDatabase.database().reference()
         let user = FIRAuth.auth()?.currentUser
         let projectsRef = databaseRef.child("user-projects/\(user!.uid)")
@@ -36,6 +39,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,6 +57,8 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsTableViewCell", for: indexPath) as! ProjectsTableViewCell
         cell.thumbnailImageView.image = projects[indexPath.row].thumbnail
+        // cell.unpublishedLabel.text = projects[indexPath.row].unpublished
+        cell.titleLabel.text = projects[indexPath.row].title
         return cell
     }
 

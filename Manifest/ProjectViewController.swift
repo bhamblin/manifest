@@ -22,6 +22,7 @@ class ProjectViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.tabBarController?.tabBar.isHidden = true
+//        self.navigationController?.title = project!.title
 
 //        detailsView.isHidden = true
 //        postsView.isHidden = false

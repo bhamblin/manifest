@@ -29,7 +29,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         projectsRef.observe(.childAdded, with: { (snapshot) -> Void in
             let projectData = snapshot.value as! [String: String]
-            let project = Project(id: snapshot.key, title: "", thumbnailUrl: projectData["thumbnail"])
+            let project = Project(id: snapshot.key, title: "Project 1", thumbnailUrl: projectData["thumbnail"])
             self.projects.append(project)
             self.feedTableView.insertRows(at: [IndexPath(row: self.projects.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
         })

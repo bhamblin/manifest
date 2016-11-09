@@ -20,8 +20,7 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
                 image.published = true
                 databaseRef.child("project-images/\(project!.id)/\(image.id)/published").setValue(true)
                 databaseRef.child("posts/\(postId)/images/\(image.id)").setValue(true)
-                // add thumbnail
-
+                
                 let indexOfImage = self.images.index(where: { $0 === image })!
                 let index = IndexPath(row: self.images.count - indexOfImage - 1, section: 0)
                 self.imagesCollectionView.reloadItems(at: [index])
@@ -55,7 +54,7 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
             return acc + (image.published ? 0 : 1)
         })
         if draftCount > 0 {
-            self.publishButton.setTitle("Publish (\(draftCount))", for: .normal)
+            self.publishButton.setTitle("PUBLISH (\(draftCount))", for: .normal)
             self.publishButton.backgroundColor = UIColor(red: 249/255, green: 104/255, blue: 109/255, alpha: 1.0)
             self.publishButton.isEnabled = true
         } else {
@@ -64,7 +63,7 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func disablePublishButton() {
-        self.publishButton.setTitle("Publish", for: .normal)
+        self.publishButton.setTitle("PUBLISH", for: .normal)
         self.publishButton.backgroundColor = UIColor(red: 249/255, green: 104/255, blue: 109/255, alpha: 0.5)
         self.publishButton.isEnabled = false
     }
@@ -136,7 +135,7 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
         let metadata = FIRStorageMetadata()
         metadata.contentType = "image/jpeg"
         
-        let imageData = UIImageJPEGRepresentation(size != nil ? resizeImage(image, size!) : image, 0.1)
+        let imageData = UIImageJPEGRepresentation(size != nil ? resizeImage(image, size!) : image, 1)
         let imagePath = "images/\(imageId)/\(name).jpeg"
         let imageRef = storageRef.child(imagePath)
         
@@ -152,7 +151,7 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
                 databaseRef.updateChildValues([
                     "project-images/\(self.project!.id)/\(imageId)": [
                         "published":  false,
-                        name: thumbnailUrl
+                        "thumbnail": thumbnailUrl
                     ],
                     "user-projects/\(user!.uid)/\(self.project.id)/title": "",
                     "user-projects/\(user!.uid)/\(self.project.id)/thumbnail": thumbnailUrl,

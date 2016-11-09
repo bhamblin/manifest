@@ -80,26 +80,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2aB-kR-DLU">
-                                <rect key="frame" x="0.0" y="110" width="375" height="508"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0u-aZ-ssG">
+                                <rect key="frame" x="12" y="76" width="351" height="44"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.40784313729999999" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="swZ-OA-QZf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="12"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="CREATE PROJECT"/>
+                                <connections>
+                                    <segue destination="U12-iW-UwU" kind="show" id="opp-Jn-T0a"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="301" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2aB-kR-DLU">
+                                <rect key="frame" x="12" y="132" width="351" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectsTableViewCell" rowHeight="100" id="z4L-0L-ga5" customClass="ProjectsTableViewCell" customModule="Manifest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProjectsTableViewCell" id="z4L-0L-ga5" customClass="ProjectsTableViewCell" customModule="Manifest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="351" height="301"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z4L-0L-ga5" id="Uo2-TE-8Kf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="351" height="301"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qd5-5T-pP7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qd5-5T-pP7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="351" height="250"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="250" id="7Ae-Y3-869"/>
+                                                    </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Project 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQw-0l-906">
+                                                    <rect key="frame" x="0.0" y="258" width="260" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2 UNPUBLISHED" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7c6-Kj-UYU">
+                                                    <rect key="frame" x="257" y="262" width="92" height="16"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                    <color key="textColor" red="0.97647058819999999" green="0.40784313729999999" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="0.97647058819999999" green="0.40784313729999999" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="qd5-5T-pP7" secondAttribute="trailing" id="0jZ-qX-Wq5"/>
+                                                <constraint firstItem="qd5-5T-pP7" firstAttribute="leading" secondItem="Uo2-TE-8Kf" secondAttribute="leading" id="C55-sB-ap8"/>
+                                                <constraint firstItem="kQw-0l-906" firstAttribute="leading" secondItem="Uo2-TE-8Kf" secondAttribute="leading" id="GTV-YB-ihJ"/>
+                                                <constraint firstItem="qd5-5T-pP7" firstAttribute="top" secondItem="Uo2-TE-8Kf" secondAttribute="top" id="Vta-2o-kUd"/>
+                                                <constraint firstItem="7c6-Kj-UYU" firstAttribute="top" secondItem="qd5-5T-pP7" secondAttribute="bottom" constant="11" id="Ynm-61-rFK"/>
+                                                <constraint firstAttribute="trailing" secondItem="7c6-Kj-UYU" secondAttribute="trailing" id="r7I-G3-plD"/>
+                                                <constraint firstItem="kQw-0l-906" firstAttribute="top" secondItem="qd5-5T-pP7" secondAttribute="bottom" constant="9" id="we0-oq-D1E"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="thumbnailImageView" destination="qd5-5T-pP7" id="RtW-do-hRC"/>
+                                            <outlet property="titleLabel" destination="kQw-0l-906" id="2R7-HO-MWi"/>
+                                            <outlet property="unpublishedLabel" destination="7c6-Kj-UYU" id="Lq5-XG-SZ2"/>
                                             <segue destination="U12-iW-UwU" kind="show" identifier="ShowProject" id="xIR-Aq-vhA"/>
                                         </connections>
                                     </tableViewCell>
@@ -109,19 +146,21 @@
                                     <outlet property="delegate" destination="J71-8t-tda" id="b2o-Ni-yhl"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0u-aZ-ssG">
-                                <rect key="frame" x="138" y="72" width="98" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create project"/>
-                                <connections>
-                                    <segue destination="U12-iW-UwU" kind="show" id="opp-Jn-T0a"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2aB-kR-DLU" firstAttribute="leading" secondItem="9Xq-3B-NVp" secondAttribute="leading" constant="12" id="7fV-Nn-OpX"/>
+                            <constraint firstAttribute="trailing" secondItem="p0u-aZ-ssG" secondAttribute="trailing" constant="12" id="8Od-sT-uMH"/>
+                            <constraint firstItem="2aB-kR-DLU" firstAttribute="top" secondItem="p0u-aZ-ssG" secondAttribute="bottom" constant="12" id="Dzs-av-5dk"/>
+                            <constraint firstAttribute="trailing" secondItem="2aB-kR-DLU" secondAttribute="trailing" constant="12" id="LTQ-5b-s1p"/>
+                            <constraint firstItem="cfZ-sd-ei0" firstAttribute="top" secondItem="2aB-kR-DLU" secondAttribute="bottom" id="cIB-2E-9w1"/>
+                            <constraint firstItem="p0u-aZ-ssG" firstAttribute="top" secondItem="IBE-Pu-N4c" secondAttribute="bottom" constant="12" id="kkt-a4-cqM"/>
+                            <constraint firstItem="p0u-aZ-ssG" firstAttribute="leading" secondItem="9Xq-3B-NVp" secondAttribute="leading" constant="12" id="yT0-gK-mL9"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SDT-BO-maM"/>
                     <connections>
+                        <outlet property="createProjectButton" destination="p0u-aZ-ssG" id="4w4-YT-6H9"/>
                         <outlet property="projectsTableView" destination="2aB-kR-DLU" id="b1T-p1-raY"/>
                     </connections>
                 </viewController>
@@ -670,14 +709,14 @@
                                     <outlet property="delegate" destination="wdL-fH-qAC" id="1sc-G4-YIn"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uuY-kg-OV1">
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uuY-kg-OV1">
                                 <rect key="frame" x="0.0" y="465" width="375" height="45"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.40784313725490196" blue="0.42745098039215684" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="hmV-Na-n9U"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="12"/>
+                                <color key="tintColor" red="0.97647058819999999" green="0.40784313729999999" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="PUBLISH"/>
                                 <connections>
                                     <action selector="publish:" destination="wdL-fH-qAC" eventType="touchUpInside" id="8ju-NV-YDN"/>
