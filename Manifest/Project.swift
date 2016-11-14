@@ -1,14 +1,17 @@
 import UIKit
+import Firebase
 
 class Project {
     var id: String
     var title: String
-    var thumbnail: UIImage
+    var thumbnailUrl: String?
+    var thumbnail: UIImage?
     
     init(id: String, title: String, thumbnailUrl: String? = nil) {
         self.id = id
         self.title = title
-        self.thumbnail = UIImage()
+        self.thumbnailUrl = thumbnailUrl
+        self.thumbnail = nil
         
         self.thumbnail = self.loadImage(url: thumbnailUrl)
     }
@@ -23,5 +26,13 @@ class Project {
             image = UIImage()
         }
         return image
+    }
+    
+    class func all(for userId: String, with: @escaping ([String: AnyObject]) -> Void) {
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("user-projects/\(userId)").observeSingleEvent(of: .value, with: { (snapshot) in
+            let projects = snapshot.value as! [String: AnyObject]
+            with(projects)
+        })
     }
 }

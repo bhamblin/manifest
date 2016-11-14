@@ -153,7 +153,7 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
                         "published":  false,
                         "thumbnail": thumbnailUrl
                     ],
-                    "user-projects/\(user!.uid)/\(self.project.id)/title": "",
+                    "user-projects/\(user!.uid)/\(self.project.id)/title": self.project!.title,
                     "user-projects/\(user!.uid)/\(self.project.id)/thumbnail": thumbnailUrl,
                     "feed-projects/\(self.project.id)/thumbnail": thumbnailUrl,
                 ])

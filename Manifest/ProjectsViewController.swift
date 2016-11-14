@@ -11,8 +11,9 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.tabBarController?.tabBar.isHidden = false
         createProjectButton.layer.cornerRadius = 4;
+        
         let databaseRef = FIRDatabase.database().reference()
         let user = FIRAuth.auth()?.currentUser
         let projectsRef = databaseRef.child("user-projects/\(user!.uid)")
@@ -25,6 +26,17 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             self.projectsTableView.insertRows(at: [IndexPath(row: self.projects.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
         })
 
+        projectsRef.observe(.childChanged, with: { (snapshot) -> Void in
+            let projectId = snapshot.key as String
+            for (index, project) in self.projects.enumerated() {
+                if project.id == projectId {
+                    let projectData = snapshot.value as! [String: String]
+                    self.projects[index] = Project(id: snapshot.key, title: projectData["title"]!, thumbnailUrl: projectData["thumbnail"])
+                    self.projectsTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+            }
+        })
+        
         projectsRef.observe(FIRDataEventType.childRemoved, with: { (snapshot) -> Void in
             let projectId = snapshot.key as String
             for (index, value) in self.projects.enumerated() {
@@ -38,8 +50,6 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,6 +58,10 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             if (sender as? UITableViewCell) != nil {
                 controller.project = projects[self.projectsTableView.indexPathForSelectedRow!.row]
             }
+        } else if segue.identifier == "CreateProject" {
+            let controller = segue.destination as! ProjectViewController
+            let user = FIRAuth.auth()?.currentUser
+            controller.project = Project(id: UUID().uuidString, title: "Project \(self.projects.count + 1)", thumbnailUrl: nil)
         }
     }
 
@@ -56,8 +70,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsTableViewCell", for: indexPath) as! ProjectsTableViewCell
-        cell.thumbnailImageView.image = projects[indexPath.row].thumbnail
-        // cell.unpublishedLabel.text = projects[indexPath.row].unpublished
+        cell.thumbnailImageView.image = projects[indexPath.row].thumbnail    
         cell.titleLabel.text = projects[indexPath.row].title
         return cell
     }
