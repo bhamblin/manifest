@@ -8,26 +8,6 @@ class ProjectViewController: UIViewController {
 
     var project: Project!
     
-    @IBAction func handleViewChange(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            detailsView.isHidden = true
-            imagesView.isHidden = false
-        } else {
-            detailsView.isHidden = false
-            imagesView.isHidden = true
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        if project.thumbnailUrl != nil {
-            let user = FIRAuth.auth()?.currentUser
-            let databaseRef = FIRDatabase.database().reference()
-            databaseRef.updateChildValues([
-                "user-projects/\(user!.uid)/\(self.project.id)/title": self.project.title
-            ])
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +19,26 @@ class ProjectViewController: UIViewController {
         imagesView.isHidden = false
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        if project.thumbnailUrl != nil {
+            let user = FIRAuth.auth()?.currentUser
+            let databaseRef = FIRDatabase.database().reference()
+            databaseRef.updateChildValues([
+                "user-projects/\(user!.uid)/\(self.project.id)/title": self.project.title
+                ])
+        }
+    }
+
+    @IBAction func handleViewChange(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            detailsView.isHidden = true
+            imagesView.isHidden = false
+        } else {
+            detailsView.isHidden = false
+            imagesView.isHidden = true
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowImages" {
             if let images = segue.destination as? ImagesViewController {

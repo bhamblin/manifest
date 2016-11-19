@@ -11,7 +11,6 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tabBarController?.tabBar.isHidden = false
         createProjectButton.layer.cornerRadius = 4;
         
         let databaseRef = FIRDatabase.database().reference()
@@ -50,6 +49,8 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
