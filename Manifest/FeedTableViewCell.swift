@@ -11,6 +11,7 @@ import UIKit
 class FeedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var projectImageView: UIImageView!
+    @IBOutlet weak var newImagesLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

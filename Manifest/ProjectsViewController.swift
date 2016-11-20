@@ -18,8 +18,8 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         let projectsRef = databaseRef.child("user-projects/\(user!.uid)")
         
         projectsRef.observe(.childAdded, with: { (snapshot) -> Void in
-            let projectData = snapshot.value as! [String: String]
-            let project = Project(id: snapshot.key, title: projectData["title"]!, thumbnailUrl: projectData["thumbnail"])
+            let projectData = snapshot.value as! [String: Any]
+            let project = Project(id: snapshot.key, projectData: projectData)
             self.projects.append(project)
             
             self.projectsTableView.insertRows(at: [IndexPath(row: self.projects.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
@@ -29,8 +29,8 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             let projectId = snapshot.key as String
             for (index, project) in self.projects.enumerated() {
                 if project.id == projectId {
-                    let projectData = snapshot.value as! [String: String]
-                    self.projects[index] = Project(id: snapshot.key, title: projectData["title"]!, thumbnailUrl: projectData["thumbnail"])
+                    let projectData = snapshot.value as! [String: Any]
+                    self.projects[index] = Project(id: snapshot.key, projectData: projectData)
                     self.projectsTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
                 }
             }
@@ -61,8 +61,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         } else if segue.identifier == "CreateProject" {
             let controller = segue.destination as! ProjectViewController
-            let user = FIRAuth.auth()?.currentUser
-            controller.project = Project(id: UUID().uuidString, title: "Project \(self.projects.count + 1)", thumbnailUrl: nil)
+            controller.project = Project(id: UUID().uuidString, title: "Project \(self.projects.count + 1)")
         }
     }
 

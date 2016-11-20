@@ -15,7 +15,7 @@ class Image {
     class func observeChildAdded(for project: Project!, with: @escaping (Image) -> Void) {
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("project-images/\(project!.id)").observe(.childAdded, with: { (snapshot) -> Void in
-            let imageData = snapshot.value as! [String: AnyObject]
+            let imageData = snapshot.value as! [String: Any]
             let id = snapshot.key as String
             let url = URL(string: imageData["thumbnail"] as! String)
             let imageContents = try! Data(contentsOf: url!)

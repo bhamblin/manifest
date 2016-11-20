@@ -25,16 +25,27 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loadProjects() {
         let databaseRef = FIRDatabase.database().reference()
         _ = FIRAuth.auth()?.currentUser
-        let projectsRef = databaseRef.child("feed-projects")
+        let feedRef = databaseRef.child("feed-projects")
         
-        projectsRef.observe(.childAdded, with: { (snapshot) -> Void in
-            let projectData = snapshot.value as! [String: String]
-            let project = Project(id: snapshot.key, title: "Project 1", thumbnailUrl: projectData["thumbnail"])
+        feedRef.observe(.childAdded, with: { (snapshot) -> Void in
+            let projectData = snapshot.value as! [String: Any]
+            let project = Project(id: snapshot.key, projectData: projectData)
             self.projects.append(project)
             self.feedTableView.insertRows(at: [IndexPath(row: self.projects.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
         })
         
-        projectsRef.observe(FIRDataEventType.childRemoved, with: { (snapshot) -> Void in
+        feedRef.observe(.childChanged, with: { (snapshot) -> Void in
+            let projectId = snapshot.key as String
+            for (index, project) in self.projects.enumerated() {
+                if project.id == projectId {
+                    let projectData = snapshot.value as! [String: Any]
+                    self.projects[index] = Project(id: snapshot.key, projectData: projectData)                    
+                    self.feedTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+            }
+        })
+
+        feedRef.observe(FIRDataEventType.childRemoved, with: { (snapshot) -> Void in
             let projectId = snapshot.key as String
             for (index, value) in self.projects.enumerated() {
                 if value.id == projectId {
@@ -51,6 +62,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath) as! FeedTableViewCell
         cell.projectImageView.image = projects[indexPath.row].thumbnail
+        let newImages = projects[indexPath.row].newImages
+        cell.newImagesLabel.text = String(describing: newImages)
         return cell
     }
     

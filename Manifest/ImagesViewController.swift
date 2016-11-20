@@ -13,20 +13,41 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
     var images = [Image]()
 
     @IBAction func publish(_ sender: Any) {
+        let user = FIRAuth.auth()?.currentUser
         let databaseRef = FIRDatabase.database().reference()
         let postId = databaseRef.child("posts").childByAutoId().key
+        
+        var updates = [String: Any]()
+        var indexes = [IndexPath]()
+        var newImages = 0
+        
         for image in images {
-            if !image.published {
+            if image.published {
+                updates["feed-projects/\(project!.id)/images/\(image.id)/new"] = false
+            } else {
+                newImages += 1
                 image.published = true
-                databaseRef.child("project-images/\(project!.id)/\(image.id)/published").setValue(true)
-                databaseRef.child("posts/\(postId)/images/\(image.id)").setValue(true)
+                
+                updates["project-images/\(project!.id)/\(image.id)/published"] = true
+                updates["feed-projects/\(project!.id)/images/\(image.id)/new"] = true
                 
                 let indexOfImage = self.images.index(where: { $0 === image })!
-                let index = IndexPath(row: self.images.count - indexOfImage - 1, section: 0)
-                self.imagesCollectionView.reloadItems(at: [index])
-                self.updatePublishButton()
+                indexes.append(IndexPath(row: self.images.count - indexOfImage - 1, section: 0))
             }
         }
+        updates["user-projects/\(user!.uid)/\(project!.id)/published"] = true
+        updates["user-projects/\(user!.uid)/\(project!.id)/newImages"] = newImages
+        
+        updates["feed-projects/\(project!.id)/published"] = true
+        updates["feed-projects/\(project!.id)/title"] = project!.title
+        updates["feed-projects/\(project!.id)/thumbnail"] = project!.thumbnailUrl
+        updates["feed-projects/\(project!.id)/newImages"] = newImages
+        
+        databaseRef.updateChildValues(updates)
+        
+        project.published = true
+        self.imagesCollectionView.reloadItems(at: indexes)
+        self.updatePublishButton()
     }
     
     override func viewDidLoad() {
@@ -143,20 +164,21 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
             if (error != nil) {
                 print("counldn't upload image", error as Any)
             } else {
+                var updates = [String: Any]()
                 let thumbnailUrl = metadata!.downloadURL()?.absoluteString
-                if self.project == nil {
-                    self.project = Project(id: NSUUID().uuidString, title: "", thumbnailUrl: thumbnailUrl)
+                if self.project.thumbnailUrl == "" {
+                    self.project.thumbnailUrl = thumbnailUrl!
+                    self.project.loadImage()
+                    updates["user-projects/\(user!.uid)/\(self.project.id)/thumbnail"] = self.project!.thumbnailUrl
+                    updates["user-projects/\(user!.uid)/\(self.project.id)/title"] = self.project!.title
+                    updates["user-projects/\(user!.uid)/\(self.project.id)/published"] = self.project!.published
+                    updates["user-projects/\(user!.uid)/\(self.project.id)/newImages"] = self.project!.newImages
                 }
                 
-                databaseRef.updateChildValues([
-                    "project-images/\(self.project!.id)/\(imageId)": [
-                        "published":  false,
-                        "thumbnail": thumbnailUrl
-                    ],
-                    "user-projects/\(user!.uid)/\(self.project.id)/title": self.project!.title,
-                    "user-projects/\(user!.uid)/\(self.project.id)/thumbnail": thumbnailUrl,
-                    "feed-projects/\(self.project.id)/thumbnail": thumbnailUrl,
-                ])
+                updates["project-images/\(self.project!.id)/\(imageId)/published"] = false
+                updates["project-images/\(self.project!.id)/\(imageId)/thumbnail"] = thumbnailUrl
+                
+                databaseRef.updateChildValues(updates)
             }
         }
     }
