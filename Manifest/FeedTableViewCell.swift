@@ -12,10 +12,12 @@ class FeedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var projectImageView: UIImageView!
     @IBOutlet weak var newImagesLabel: UILabel!
+    @IBOutlet weak var newImagesBackgroundView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        newImagesBackgroundView.layer.cornerRadius = 20
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

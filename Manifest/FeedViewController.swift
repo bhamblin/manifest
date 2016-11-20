@@ -9,6 +9,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if FIRAuth.auth()?.currentUser != nil {
             loadProjects()
         }
@@ -62,8 +63,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath) as! FeedTableViewCell
         cell.projectImageView.image = projects[indexPath.row].thumbnail
-        let newImages = projects[indexPath.row].newImages
-        cell.newImagesLabel.text = String(describing: newImages)
+        let newImages = String(projects[indexPath.row].newImages)
+        cell.newImagesLabel.text = "+\(newImages)"
         return cell
     }
     
