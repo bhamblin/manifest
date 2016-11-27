@@ -40,7 +40,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             for (index, project) in self.projects.enumerated() {
                 if project.id == projectId {
                     let projectData = snapshot.value as! [String: Any]
-                    self.projects[index] = Project(id: snapshot.key, projectData: projectData)                    
+                    self.projects[index] = Project(id: snapshot.key, projectData: projectData)
                     self.feedTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
                 }
             }

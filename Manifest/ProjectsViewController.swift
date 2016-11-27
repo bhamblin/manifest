@@ -72,6 +72,12 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsTableViewCell", for: indexPath) as! ProjectsTableViewCell
         cell.thumbnailImageView.image = projects[indexPath.row].thumbnail    
         cell.titleLabel.text = projects[indexPath.row].title
+        if projects[indexPath.row].unpublishedImages > 0 {
+            cell.unpublishedLabel.isHidden = false
+            cell.unpublishedLabel.text = "\(projects[indexPath.row].unpublishedImages) UNPUBLISHED"
+        } else {
+            cell.unpublishedLabel.isHidden = true
+        }
         return cell
     }
 

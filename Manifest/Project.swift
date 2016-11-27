@@ -7,7 +7,7 @@ class Project {
     var thumbnailUrl: String
     var thumbnail: UIImage?
     var newImages = 0
-    var published = false
+    var unpublishedImages = 0
     
     init(id: String, projectData: [String: Any]) {
         self.id = id
@@ -15,7 +15,7 @@ class Project {
         self.thumbnailUrl = projectData["thumbnail"] as! String
         self.thumbnail = nil
         self.newImages = projectData["newImages"] as! Int
-        self.published = projectData["published"] as! Bool
+        self.unpublishedImages = projectData["unpublishedImages"] as! Int        
         
         self.loadImage()
     }
@@ -28,7 +28,7 @@ class Project {
         
         self.loadImage()
     }
-    
+        
     func loadImage() {
         if thumbnailUrl != "" {
             let imageData = try! Data(contentsOf: URL(string: self.thumbnailUrl)!)
@@ -37,12 +37,4 @@ class Project {
             thumbnail = UIImage()
         }
     }
-    
-//    class func all(for userId: String, with: @escaping ([String: Any]) -> Void) {
-//        let databaseRef = FIRDatabase.database().reference()
-//        databaseRef.child("user-projects/\(userId)").observeSingleEvent(of: .value, with: { (snapshot) in
-//            let projects = snapshot.value as! [String: Any]
-//            with(projects)
-//        })
-//    }
 }

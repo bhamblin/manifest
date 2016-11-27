@@ -19,16 +19,6 @@ class ProjectViewController: UIViewController {
         imagesView.isHidden = false
     }
 
-//    override func viewWillDisappear(_ animated: Bool) {
-//        if project.thumbnailUrl != "" {
-//            let user = FIRAuth.auth()?.currentUser
-//            let databaseRef = FIRDatabase.database().reference()
-//            databaseRef.updateChildValues([
-//                "user-projects/\(user!.uid)/\(self.project.id)/title": self.project.title,
-//            ])
-//        }
-//    }
-
     @IBAction func handleViewChange(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             detailsView.isHidden = true
