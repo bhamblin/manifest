@@ -63,8 +63,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath) as! FeedTableViewCell
         cell.projectImageView.image = projects[indexPath.row].thumbnail
-        let newImages = String(projects[indexPath.row].newImages)
-        cell.newImagesLabel.text = "+\(newImages)"
+        let newImages = projects[indexPath.row].newImages
+        if newImages > 1 {
+            cell.newImagesBackgroundView.isHidden = false
+            cell.newImagesLabel.text = "+\(newImages - 1)"
+        } else {
+            cell.newImagesBackgroundView.isHidden = true
+        }
         return cell
     }
     
