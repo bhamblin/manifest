@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,30 +33,68 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="380"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yHQ-u9-vwK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3F9-QN-MEs" customClass="Feed">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="380"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZS5-3M-I8b">
-                                                    <rect key="frame" x="8" y="8" width="40" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdE-xb-bQ1">
-                                                            <rect key="frame" x="-2" y="0.0" width="40" height="40"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Eaa-71-WjR">
+                                                        <size key="itemSize" width="373" height="332"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedImagesCollectionViewCell" id="5lF-uc-R6H" customClass="FeedImagesCollectionViewCell" customModule="Manifest" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="3" width="375" height="375"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="12"/>
-                                                            <color key="textColor" red="0.97647058819999999" green="0.40784313729999999" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nlz-de-bsd">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    </imageView>
+                                                                </subviews>
+                                                            </view>
+                                                            <size key="customSize" width="375" height="375"/>
+                                                            <connections>
+                                                                <outlet property="projectImageView" destination="nlz-de-bsd" id="Gdf-6S-RUA"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="V8B-Vj-dT2" id="5AN-4B-6aC"/>
+                                                        <outlet property="delegate" destination="V8B-Vj-dT2" id="hXj-3L-X17"/>
+                                                    </connections>
+                                                </collectionView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJT-cZ-nWS">
+                                                    <rect key="frame" x="8" y="8" width="32" height="32"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihq-xK-DCk">
+                                                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="cLL-f7-CTT"/>
+                                                        <constraint firstAttribute="width" constant="32" id="hl6-A3-9iF"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BJT-cZ-nWS" firstAttribute="leading" secondItem="2Ci-2a-Cj1" secondAttribute="leadingMargin" id="huI-pu-Rjk"/>
+                                                <constraint firstItem="BJT-cZ-nWS" firstAttribute="top" secondItem="2Ci-2a-Cj1" secondAttribute="topMargin" id="xdM-Pt-Dxb"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="newImagesBackgroundView" destination="ZS5-3M-I8b" id="85x-0I-YE5"/>
-                                            <outlet property="newImagesLabel" destination="BdE-xb-bQ1" id="Xyr-gY-ySU"/>
-                                            <outlet property="projectImageView" destination="yHQ-u9-vwK" id="Knh-Bi-7WX"/>
+                                            <outlet property="imagesCollectionView" destination="3F9-QN-MEs" id="NuJ-Lp-8Cj"/>
+                                            <outlet property="newImagesBackgroundView" destination="BJT-cZ-nWS" id="sh1-Kg-cnj"/>
+                                            <outlet property="newImagesLabel" destination="ihq-xK-DCk" id="WVC-pu-wvd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

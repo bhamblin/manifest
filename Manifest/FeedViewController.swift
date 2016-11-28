@@ -6,6 +6,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var feedTableView: UITableView!
     
     var projects = [Project]()
+    var projectImages = [String: [UIImage]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let projectData = snapshot.value as! [String: Any]
             let project = Project(id: snapshot.key, projectData: projectData)
             self.projects.append(project)
-            self.feedTableView.insertRows(at: [IndexPath(row: self.projects.count-1, section: 0)], with: UITableViewRowAnimation.automatic)
+            let index = self.projects.count-1
+            self.feedTableView.insertRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+
+            self.loadFeedImages(project: project, index: index)
         })
         
         feedRef.observe(.childChanged, with: { (snapshot) -> Void in
@@ -57,12 +61,38 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         })
     }
     
+
+    func loadFeedImages(project: Project, index: Int) {
+        let databaseRef = FIRDatabase.database().reference()
+        let feedRef = databaseRef.child("project-images/\(project.id)")
+        
+        feedRef.observe(.childAdded, with: { (snapshot) -> Void in
+            let imageData = snapshot.value as! [String: Any]
+            let url = URL(string: imageData["thumbnail"] as! String)!
+            let thumbnailData = try! Data(contentsOf: url)
+            let thumbnail = UIImage(data: thumbnailData)!
+            if self.projectImages[project.id] == nil {
+                self.projectImages[project.id] = [UIImage]()
+            }
+            self.projectImages[project.id]?.append(thumbnail)
+            self.feedTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        })
+    }
     
+
     // TableView
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath) as! FeedTableViewCell
-        cell.projectImageView.image = projects[indexPath.row].thumbnail
+        let project = projects[indexPath.row]
+        
+        if self.projectImages[project.id] != nil {
+            cell.images = self.projectImages[project.id]
+        } else {
+            cell.images = [project.thumbnail!]
+        }
+        cell.imagesCollectionView.reloadData()
+        
         let newImages = projects[indexPath.row].newImages
         if newImages > 1 {
             cell.newImagesBackgroundView.isHidden = false
@@ -70,6 +100,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             cell.newImagesBackgroundView.isHidden = true
         }
+        
         return cell
     }
     
