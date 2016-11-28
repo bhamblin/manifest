@@ -32,15 +32,17 @@ class ImagesViewController: UIViewController, UICollectionViewDelegate, UICollec
                 indexes.append(IndexPath(row: self.images.count - indexOfImage - 1, section: 0))
             }
         }
-        updates["user-projects/\(user!.uid)/\(project!.id)/title"] = project!.title
-        updates["user-projects/\(user!.uid)/\(project!.id)/thumbnail"] = project!.thumbnailUrl
-        updates["user-projects/\(user!.uid)/\(project!.id)/newImages"] = newImages
-        updates["user-projects/\(user!.uid)/\(project!.id)/unpublishedImages"] = 0
+
+        var projectUpdates = [String: Any]()
+        projectUpdates = [
+            "title": project!.title,
+            "thumbnail": project!.thumbnailUrl,
+            "newImages": newImages,
+            "unpublishedImages": 0
+        ]
         
-        updates["feed-projects/\(project!.id)/title"] = project!.title
-        updates["feed-projects/\(project!.id)/thumbnail"] = project!.thumbnailUrl
-        updates["feed-projects/\(project!.id)/newImages"] = newImages
-        updates["feed-projects/\(project!.id)/unpublishedImages"] = 0
+        updates["user-projects/\(user!.uid)/\(project!.id)"] = projectUpdates
+        updates["feed-projects/\(project!.id)"] = projectUpdates
         
         databaseRef.updateChildValues(updates)
         
